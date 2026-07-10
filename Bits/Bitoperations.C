@@ -1,12 +1,12 @@
 
 #include <stdio.h>
-void Bitset(unsigned char *reg,int position)
+void bitset(unsigned char *reg,int position)
 {
 *reg = *reg | (1 << position);
 return;
 }
 
-void Bitclear(unsigned char *reg,int position)
+void bitclear(unsigned char *reg,int position)
 {
 *reg = *reg & ~(1 << position);
 return;
@@ -23,10 +23,21 @@ printf("Bit %d is not set\n",position);
 }
 }
 
+void printregister(unsigned char reg)
+{
+    printf("Current register value: ");
+    for (int i = 7; i >= 0; --i)
+    {
+        printf("%d", (reg >> i) & 1);
+    }
+    printf("\n");
+}
+
 int main() {
 	unsigned char reg = 0;
     while (1)
     {
+        printregister(reg);
         printf("Enter command (set(1), clear(2), check(3)) and position (0-7) or 4 for exit: ");
         int command;
         int position;
@@ -34,6 +45,10 @@ int main() {
         scanf("%d", &command);
             if(command >= 1 && command <= 4)
             {
+                if(command == 4)
+                {
+                    return 0;
+                }
                 break;
             }
         else{printf("Invalid command\n");}
@@ -48,19 +63,15 @@ int main() {
         }
         if (command == 1)
         {
-            Bitset(&reg, position);
+            bitset(&reg, position);
         }
         else if (command == 2)
         {
-            Bitclear(&reg, position);
+            bitclear(&reg, position);
         }
         else if (command == 3)
         {
             bitcheck(&reg, position);
-        }
-        else if (command == 4)
-        {
-            break;
         }
         
     }
