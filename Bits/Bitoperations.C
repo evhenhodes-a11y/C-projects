@@ -30,7 +30,22 @@ int main() {
         printf("Enter command (set(1), clear(2), check(3)) and position (0-7) or 4 for exit: ");
         int command;
         int position;
-        scanf("%d %d", &command, &position);
+        while(1){
+        scanf("%d", &command);
+            if(command >= 1 && command <= 4)
+            {
+                break;
+            }
+        else{printf("Invalid command\n");}
+        }
+        while(1){
+        scanf("%d", &position);
+            if(position >= 0 && position <= 7)
+            {
+                break;
+            }
+        else{printf("Invalid position\n");}
+        }
         if (command == 1)
         {
             Bitset(&reg, position);
@@ -47,10 +62,7 @@ int main() {
         {
             break;
         }
-        else
-        {
-            printf("Invalid command\n");
-        }
+        
     }
     
     return 0;
